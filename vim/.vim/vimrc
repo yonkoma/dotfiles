@@ -1,0 +1,102 @@
+" Misc.
+filetype plugin indent on
+set ruler								 " Show row and column ruler information
+set undolevels=1000					 " Number of undo levels
+set backspace=indent,eol,start	 " Allow backspace to go over specified boundaries
+set nomodeline
+
+" Enable persistent undo so that undo history persists across vim sessions
+set undofile
+set undodir=~/.vim/undo
+
+"" UI
+syntax enable							 " enable syntax processing
+set number								 " Show line numbers
+set showcmd								 " Show command in bottom bar
+set cursorline							 " Highlight current line
+set wildmenu							 " Visual autocomplete for command menu
+set lazyredraw							 " Redraw only when we need to
+set showmatch							 " Highlight matching [{()}]
+set matchtime=0						 " How many seconds to highlight the matching paren
+
+"" Searching
+set hlsearch							 " Highlight all search results
+set incsearch							 " Searches for strings incrementally
+set ignorecase							 " Always case-insensitive
+set smartcase							 " Search case-sensitive if uppercase letters were typed
+
+"" Indentation
+set tabstop=4							 " Number of visual spaces per tab
+set copyindent							 " Keep indentation from previous line
+set preserveindent					 " Try too preserve indentation when editing line
+set noexpandtab						 " Do NOT convert tabs to spaces
+set shiftwidth=4						 " Number of auto-indent spaces
+set softtabstop=0						 " Number of spaces per tab when editing
+" set smarttab								" Enable smart-tabs
+
+
+augroup python_files
+	autocmd!
+	autocmd FileType python set tabstop=4
+augroup END
+
+augroup DetectIndent
+	autocmd!
+	autocmd BufReadPost * DetectIndent
+augroup END
+
+"" Movement
+
+" move vertically by visual line
+nnoremap j gj
+nnoremap k gk
+
+"" Plugins
+
+" Specify a directory for plugins
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
+
+" Easy commenting
+Plug 'tpope/vim-commentary'
+
+" Detect file indentation
+Plug 'roryokane/detectindent'
+
+" Vim Airline (the status line at the bottom)
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+" let g:airline#extensions#whitespace#mixed_indent_algo = 2 " Recognize tabs for indent, spaces for align
+
+" Color themes
+Plug 'srcery-colors/srcery-vim'
+Plug 'xiaody/thornbird.vim'
+Plug 'YorickPeterse/happy_hacking.vim'
+Plug 'dennougorilla/azuki.vim'
+
+Plug 'mbbill/undotree'							 " Visualizer for undo tree
+highlight DiffAdd ctermbg=DarkBlue			 " Set the highlight color for added text
+highlight DiffChange ctermbg=DarkMagenta	 " Set the highlight color for changed text
+
+" Initialize plugin system
+call plug#end()
+
+
+"" Color customization
+set background=dark
+set termguicolors						 " True colors (not limited to 256)
+colorscheme srcery
+
+"" Custom Functions
+
+" strips trailing whitespace at the end of files
+function! StripTrailingWhitespaces()
+	" save last search & cursor position
+	let _s=@/
+	let l = line(".")
+	let c = col(".")
+	%s/\s\+$//e
+	let @/=_s
+	call cursor(l, c)
+endfunction
+
