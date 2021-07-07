@@ -60,6 +60,9 @@ call plug#begin('~/.vim/plugged')
 " Easy commenting
 Plug 'tpope/vim-commentary'
 
+" Support EditorConfig [https://editorconfig.org/]
+Plug 'editorconfig/editorconfig-vim'
+
 " Detect file indentation
 Plug 'roryokane/detectindent'
 
