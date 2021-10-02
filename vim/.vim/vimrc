@@ -14,10 +14,13 @@ syntax enable							 " enable syntax processing
 set number								 " Show line numbers
 set showcmd								 " Show command in bottom bar
 set cursorline							 " Highlight current line
-set wildmenu							 " Visual autocomplete for command menu
 set lazyredraw							 " Redraw only when we need to
 set showmatch							 " Highlight matching [{()}]
 set matchtime=0						 " How many seconds to highlight the matching paren
+
+"" Complation
+set complete=.,w,b,u,t
+set wildmenu							 " Visual autocomplete for command menu
 
 "" Searching
 set hlsearch							 " Highlight all search results
@@ -60,6 +63,9 @@ call plug#begin('~/.vim/plugged')
 " Easy commenting
 Plug 'tpope/vim-commentary'
 
+" Deals with stuff related to word variants
+Plug 'tpope/vim-abolish'
+
 " Support EditorConfig [https://editorconfig.org/]
 Plug 'editorconfig/editorconfig-vim'
 
@@ -70,6 +76,9 @@ Plug 'roryokane/detectindent'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " let g:airline#extensions#whitespace#mixed_indent_algo = 2 " Recognize tabs for indent, spaces for align
+
+" Better C and C++ syntax highlighting
+Plug 'octol/vim-cpp-enhanced-highlight'
 
 " Color themes
 Plug 'srcery-colors/srcery-vim'
