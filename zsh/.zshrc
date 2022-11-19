@@ -1,6 +1,5 @@
 alias ls="exa --git"
 
-export EDITOR="vim"
 export PAGER="less"
 
 autoload -U compinit
@@ -12,7 +11,7 @@ setopt sharehistory
 setopt extendedhistory
 
 autoload -U colors && colors
-PS1="%{$fg[yellow]%}$PS1%{$reset_color%}%"
+PS1="%{$fg[yellow]%}%n@%m %1~ %# %{$reset_color%}%"
 
 if [ -f ~/.zshrc_local ]; then
 	source ~/.zshrc_local
